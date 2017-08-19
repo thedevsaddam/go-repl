@@ -75,7 +75,10 @@ func readLines() string {
 		}
 
 		text, _ := reader.ReadString('\n')
-		if strings.TrimRight(text, "\n") == ":cr" {
+		// CRLF to LF
+		text = strings.Replace(text, "\n", "", -1)
+
+		if strings.Compare(strings.TrimRight(text, "\n"), ":cr") == 0 {
 			return body
 		}
 		body += "\n" + text
